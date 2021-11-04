@@ -9,6 +9,8 @@ public class TP_CameraController : MonoBehaviour
 
     public Transform Target;
     public float Distance = -5.0f;
+    public float Max_Distance = -10.0f;
+    public float Min_Distance = -2.0f;
     public float X_Sensitivity = 8.0f;
     public float Y_Sensitivity = 4.0f;
 
@@ -30,6 +32,7 @@ public class TP_CameraController : MonoBehaviour
         {
             Cursor.visible = false;
         }
+
         if (Input.GetKey(KeyCode.Mouse1))
         {
             _currentX += Input.GetAxis("Mouse X");
@@ -39,7 +42,7 @@ public class TP_CameraController : MonoBehaviour
 
         if (Input.GetAxis("Mouse ScrollWheel") != 0f)
         {
-            Distance += Input.GetAxis("Mouse ScrollWheel");
+            Distance = Mathf.Clamp(Distance + Input.GetAxis("Mouse ScrollWheel"), Max_Distance, Min_Distance);
         }
     }
     void LateUpdate()
