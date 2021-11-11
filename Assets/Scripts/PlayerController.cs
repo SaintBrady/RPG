@@ -15,6 +15,10 @@ public class PlayerController : MonoBehaviour
     private Vector3 movement;
     private GameObject[] enemies;
 
+    private int health = 100;
+    private int maxHealth = 100;
+    public HealthBar healthBar;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -22,6 +26,8 @@ public class PlayerController : MonoBehaviour
         controller = GetComponent<CharacterController>();
         cam = TP_Camera;
         FP_Camera.enabled = false;
+
+        healthBar.SetMaxHealth(maxHealth);
     }
 
     // Update is called once per frame
@@ -65,5 +71,11 @@ public class PlayerController : MonoBehaviour
         {
             cam = TP_Camera;
         }
+    }
+
+    public void TakeDamage(int damage)
+    {
+        health -= damage;
+        healthBar.SetHealth(health);
     }
 }
